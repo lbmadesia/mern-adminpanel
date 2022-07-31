@@ -48,7 +48,7 @@ npm run dev
 npm run server
 ```
 
-## Build & Deploy
+### Build & Deploy
 
 ```
 # Create frontend prod build
@@ -68,17 +68,20 @@ npm run data:import
 npm run data:destroy
 ```
 
+
+### Logging In
+
 ```
-## Logging In
-
-`php artisan db:seed` adds three users with respective roles. The credentials are as follows:
-
 * Administrator: `admin@admin.com`
 * Backend User: `executive@executive.com`
 * Default User: `user@user.com`
 
 Password: `1234`
+```
 
 
-# License
+### Seed Database
+
+```
 This MERN Project Starter is open-sourced software licensed under the MIT license
+```

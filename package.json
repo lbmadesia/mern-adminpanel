@@ -1,16 +1,15 @@
 {
   "name": "mern_admin_panel",
   "version": "1.0.0",
-  "description": "its mern project starter base upon boiler plate ",
-  "main": "index.js",
+  "description": "It's MERN Project starter base upon boiler plate ",
+  "main": "server.js",
   "scripts": {
     "start": "node backend/index",
     "server": "nodemon backend/index",
     "client": "npm start --prefix frontend",
     "dev": "concurrently \"npm run server\" \"npm run client\"",
     "data:import": "node backend/seeder",
-    "data:destroy": "node backend/seeder -d",
-    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix frontend && npm run build --prefix frontend"
+    "data:destroy": "node backend/seeder -d"
   },
   "author": "lb madesia",
   "license": "ISC",
@@ -19,6 +18,10 @@
     "nodemon": "^2.0.19"
   },
   "dependencies": {
-    "express": "^4.18.1"
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.1",
+    "express": "^4.18.1",
+    "morgan": "^1.10.0",
+    "path": "^0.12.7"
   }
 }
