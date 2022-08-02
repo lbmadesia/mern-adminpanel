@@ -4,8 +4,8 @@
   "description": "It's MERN Project starter base upon boiler plate ",
   "main": "server.js",
   "scripts": {
-    "start": "node backend/index",
-    "server": "nodemon backend/index",
+    "start": "node backend/server",
+    "server": "nodemon backend/server",
     "client": "npm start --prefix frontend",
     "dev": "concurrently \"npm run server\" \"npm run client\"",
     "data:import": "node backend/seeder",

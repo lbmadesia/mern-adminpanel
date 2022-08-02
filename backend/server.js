@@ -1,25 +1,33 @@
-import path from 'path'
-import express from 'express'
-import dotenv from 'dotenv'
-import morgan from 'morgan'
-import cors from "cors"
+const path = require('path');
+const dotenv = require('dotenv');
+const express = require('express');
+const morgan = require('morgan');
+// const cors = require('cors');
+const commonHelper = require('./app/helpers/commonHelper.js');
+const routePath = '/routes';
+const routePathprefix = '/backend';
 
-dotenv.config()
+dotenv.config();
 
-const app = express()
+const app = express();
 
 if (process.env.NODE_ENV === 'development') {
-  app.use(morgan('dev'))
+  app.use(morgan('dev'));
 }
 
 // app.use(express.json())
-app.use(cors())
+// app.use(cors());
 
-
-const PORT = process.env.PORT || 5000
-app.listen(
+const PORT = process.env.PORT || 5000;
+commonHelper.routeAccess(app,routePath,routePathprefix).then((res)=>{
+  app.listen(
     PORT,
     console.log(
-      `Server running in ${process.env.NODE_ENV} mode on port ${PORT}`.yellow.bold
+      `Server running in ${process.env.NODE_ENV} mode on port ${PORT}`
     )
-  )
+  );
+}).catch((error)=>{
+  console.log('Route Build Error : ',error);
+});
+
+
