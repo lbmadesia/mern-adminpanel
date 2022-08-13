@@ -3,9 +3,9 @@ const dotenv = require('dotenv');
 const express = require('express');
 const morgan = require('morgan');
 // const cors = require('cors');
-const commonHelper = require('./app/helpers/commonHelper.js');
-const routePath = '/routes';
-const routePathprefix = '/backend';
+const routeAccess  = require('route-access');
+const routePath = 'backend/routes';
+const routePrefix = {'panel':'admin','site':'client'};
 
 dotenv.config();
 
@@ -19,7 +19,7 @@ if (process.env.NODE_ENV === 'development') {
 // app.use(cors());
 
 const PORT = process.env.PORT || 5000;
-commonHelper.routeAccess(app,routePath,routePathprefix).then((res)=>{
+routeAccess.access(app,routePath,routePrefix).then((res)=>{
   app.listen(
     PORT,
     console.log(
