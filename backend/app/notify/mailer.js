@@ -20,7 +20,7 @@ var html1 = `<!DOCTYPE html>
 	<title>${process.env.APP_NAME} Info </title>
 </head>
 <body style="background-color:#EDF2F8">
-    <h1 align="center" style="padding:20px; color:#666">${process.env.APP_NAME}</h1>
+    <h1 align="center" style="padding:20px; color:#666;text-transform: uppercase;">${process.env.APP_NAME}</h1>
     <div
         style="with:100%;min-height:70vh; display: flex; justify-content: center; padding-left:20px; padding-right:20px;">
         <table align="center" border="0" cellpadding="0" cellspacing="0" width="550" bgcolor="white"
@@ -93,7 +93,19 @@ const line = (text) => {
 const link = (url,text=url) => {
     return new Promise((resolve, reject) => {
         try {
-            html1 = html1+`<a href="${url}">${text}</a><br />`;
+            html1 = html1+` <a href="${url}">${text}</a> `;
+            resolve(true);
+        }
+        catch (error) {
+            reject(false);
+        }
+    });
+}
+
+const button = (text,url='#') => {
+    return new Promise((resolve, reject) => {
+        try {
+            html1 = html1+`<center> <button style="background:#044; border:1px solid #fff; padding:10px; border-radius: 2px;" ><a href="${url}" style="text-decoration:none; color:#fff; font-family:Sans-serif;" > ${text} </a></button></center>`;
             resolve(true);
         }
         catch (error) {
@@ -164,4 +176,4 @@ const varerase = () => {
     });
 }
 
-module.exports = { notify, greeting,line,link,footer,subject};
+module.exports = {notify, greeting, line, link, button, footer, subject};
