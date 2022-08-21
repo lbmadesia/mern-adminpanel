@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
-
-const {store} = require('../../app/controllers/panel/registerController');
+const controllerPath = '../../app/controllers/';
+const {store} = require(controllerPath+'panel/registerController');
 router.post("/register",store);
 
 module.exports = router;

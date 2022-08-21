@@ -2,22 +2,21 @@ const path = require('path');
 const dotenv = require('dotenv');
 const express = require('express');
 const morgan = require('morgan');
-// const cors = require('cors');
+const cors = require('cors');
 const bodyParser = require('body-parser');
 const routeAccess = require('route-access');
-
 dotenv.config();
 const app = express();
-
+app.use(cors());
 if (process.env.NODE_ENV === 'development') {
   app.use(morgan('dev'));
 }
-
-app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended:false}));
-// app.use(express.json())
-// app.use(cors());
-const PORT = process.env.PORT || 5000;
+app.use(bodyParser.json());
+app.use("/storages",express.static(path.join(__dirname, '/storages')));
+app.use(express.static(path.join(__dirname, '/app/controllers')));
+
+const PORT = process.env.PORT || 8080;
 routeAccess.access(app,"backend/routes",{'panel':'admin','site':'client'}).then((res)=>{
   app.listen(
     PORT,
