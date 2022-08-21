@@ -1,7 +1,4 @@
 const express = require('express');
 const router = express.Router();
-router.get("/site/home", () => {
-    console.log('route ready site web');
-});
-
+const controllerPath = '../../app/controllers/site/';
 module.exports =router;
