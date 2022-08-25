@@ -8,7 +8,7 @@
     "server": "nodemon backend/server",
     "client": "npm start --prefix frontend",
     "dev": "concurrently \"npm run server\" \"npm run client\"",
-    "data:import": "node backend/seeder",
+    "data:seed": "node backend/seeder",
     "data:destroy": "node backend/seeder -d"
   },
   "author": "lb madesia",
@@ -24,6 +24,7 @@
     "express": "^4.18.1",
     "fs": "^0.0.1-security",
     "lb-mailer": "^1.0.0",
+    "mongoose": "^6.5.3",
     "morgan": "^1.10.0",
     "nodemailer": "^6.7.8",
     "path": "^0.12.7",

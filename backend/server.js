@@ -1,11 +1,10 @@
-const path = require('path');
+require('path').config();
 const dotenv = require('dotenv');
 const express = require('express');
 const morgan = require('morgan');
 const cors = require('cors');
 const bodyParser = require('body-parser');
 const routeAccess = require('route-access');
-dotenv.config();
 const app = express();
 app.use(cors());
 if (process.env.NODE_ENV === 'development') {
