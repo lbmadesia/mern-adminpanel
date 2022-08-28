@@ -8,8 +8,8 @@
     "server": "nodemon backend/server",
     "client": "npm start --prefix frontend",
     "dev": "concurrently \"npm run server\" \"npm run client\"",
-    "data:seed": "node backend/seeder",
-    "data:destroy": "node backend/seeder -d"
+    "data:seed": "node backend/database/seeder",
+    "data:destroy": "node backend/database/seeder -d"
   },
   "author": "lb madesia",
   "license": "ISC",
@@ -18,6 +18,7 @@
     "nodemon": "^2.0.19"
   },
   "dependencies": {
+    "bcryptjs": "^2.4.3",
     "body-parser": "^1.20.0",
     "cors": "^2.8.5",
     "dotenv": "^16.0.1",
