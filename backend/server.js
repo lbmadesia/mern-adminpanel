@@ -3,7 +3,6 @@ const path = require('path');
 const express = require('express');
 const morgan = require('morgan');
 const cors = require('cors');
-const bodyParser = require('body-parser');
 const routeAccess = require('route-access');
 const connectDB = require('./config/db');
 const app = express();
@@ -12,12 +11,12 @@ if (process.env.NODE_ENV === 'development') {
   app.use(morgan('dev'));
 }
 connectDB();
-app.use(bodyParser.urlencoded({extended:false}));
-app.use(bodyParser.json());
+app.use(express.urlencoded({extended:false}));
+app.use(express.json());
 app.use("/storages",express.static(path.join(__dirname, '/storages')));
 
 const PORT = process.env.PORT || 8080;
-routeAccess.access(app,"backend/routes",{'panel':'admin','site':'client'}).then((res)=>{
+routeAccess.access(app,"backend/routes",{'panel':'admin','site':'/'}).then((res)=>{
   app.listen(
     PORT,
     console.log(
