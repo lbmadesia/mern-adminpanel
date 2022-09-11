@@ -2,12 +2,17 @@ const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const userSchema = mongoose.Schema({
+    googleId: { type: String, default: null},
     name: { type: String, required: true },
+    lastName: { type: String, required: true },
     email: { type: String, required: true, unique: true },
+    countryCode: { type: String, default: null},
+    phone: { type: Number, default: null },
     password: { type: String, required: true },
-    is_active: { type: Boolean, default: true },
-    created_at: { type: Date, default: Date.now },
-    updated_at: { type: Date, default: Date.now }
+    avtar: { type: String, default: null},
+    isActive: { type: Boolean, default: true },
+    createdAt: { type: Date, default: Date.now },
+    updatedAt: { type: Date, default: Date.now }
 });
 
 userSchema.methods.matchPassword = async function (enteredPassword) {
@@ -29,5 +34,4 @@ userSchema.pre("save", async function (next) {
     this.password = bcrypt.hashSync(this.password, salt);
 });
 
-const User = mongoose.model('users', userSchema);
-module.exports = User;
+module.exports = mongoose.model('User', userSchema);
