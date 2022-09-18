@@ -2,8 +2,16 @@ require('dotenv').config();
 const mongoose = require('mongoose');
 const User = require('../app/models/User');
 const Role = require('../app/models/Role');
+const Permission = require('../app/models/Permission');
+const PermissionRole = require('../app/models/PermissionRole');
+const Module = require('../app/models/Module');
+const Menu = require('../app/models/Menu');
 const users = require('./collection/User');
 const roles = require('./collection/Role');
+const permissions = require('./collection/Permission');
+const permissionRoles = require('./collection/PermissionRole');
+const modules = require('./collection/Module');
+const menus = require('./collection/Menu');
 const connectDB = require('../config/db');
 connectDB();
 
@@ -21,8 +29,28 @@ const importData = async () => {
             }
           });
          const createdUsers = await User.insertMany(defaultUsers);
-          //const adminId = createdUsers[0]._id;
+        const adminId = createdUsers[0]._id;
+        const defaultPermission =  permissions.map((permission)=>{
+            return {...permission,createdBy:adminId}
+        });
+       
 
+        const createdPermission = await Permission.insertMany(defaultPermission);
+        const companyRoleId = createdRoles[1]._id;
+        const dashboardPermissionId = createdPermission[0]._id;
+        const defaultpermissionRoles = permissionRoles.map((permissionRole)=>{
+            return {...permissionRole,roleId:companyRoleId,permissionId:dashboardPermissionId,createdBy:adminId};
+        });
+        const createdpermissionRole = await PermissionRole.insertMany(defaultpermissionRoles);
+        const defaultModules = modules.map((module)=>{
+            return {...module,createdBy:adminId};
+        });
+        const createdModule = await Module.insertMany(defaultModules);
+        const defaultMenus = menus.map((menu)=>{
+            return {...menu,createdBy:adminId};
+        });
+        const createdMenu = await Menu.insertMany(defaultMenus);
+     
         console.log('Data Imported!');
         process.exit();
     } catch (error) {
@@ -43,8 +71,12 @@ const destroyData = async () => {
 }
 
 const deleteSchema = async () => {
+
+    await PermissionRole.deleteMany();
+    await Permission.deleteMany();
     await User.deleteMany();
     await Role.deleteMany();
+    await Module.deleteMany();
 }
 
 

@@ -1,3 +1,4 @@
+const { ObjectID } = require('bson');
 const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
@@ -12,9 +13,10 @@ const userSchema = mongoose.Schema({
     password: { type: String, required: true },
     avtar: { type: String, default: null },
     isActive: { type: Boolean, default: true },
+    roleId: { type: ObjectID },
     createdAt: { type: Date, default: Date.now },
-    updatedAt: { type: Date, default: Date.now },
-    roleId: { type: String }
+    updatedAt: { type: Date, default: Date.now }
+    
 });
 
 userSchema.methods.matchPassword = async function (enteredPassword) {

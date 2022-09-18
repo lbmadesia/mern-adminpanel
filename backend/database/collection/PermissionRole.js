@@ -1,9 +1,9 @@
-const premissionRole = [
+const permissionRole = [
     {
-        roleId:"admin",
+        roleId:"company",
         permissionId:"Dashborad",
-        createdBy:null,
+        createdBy:'admin',
     }
 ];
 
-module.exports = premissionRole;
+module.exports = permissionRole;

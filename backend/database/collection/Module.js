@@ -1,4 +1,4 @@
-const module=[
+const modules =[
     {
         name:'Dashboard',
         backendUrl:"api/admin/dashboard",
@@ -7,4 +7,4 @@ const module=[
     }
 ];
 
-exports.module = module;
+module.exports = modules;
