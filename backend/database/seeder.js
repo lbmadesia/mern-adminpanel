@@ -1,21 +1,27 @@
 require('dotenv').config();
 const mongoose = require('mongoose');
 const User = require('../app/models/User');
+const Role = require('../app/models/Role');
 const users = require('./collection/User');
+const roles = require('./collection/Role');
 const connectDB = require('../config/db');
 connectDB();
 
 const importData = async () => {
     try {
         await deleteSchema();
-        const createdUsers = await User.insertMany(users);
-        const adminId = createdUsers[0]._id;
+        const createdRoles = await Role.insertMany(roles);
 
-        //   const sampleProducts = products.map((product) => {
-        //     return { ...product, user: adminId }
-        //   })
-
-        //   await Product.insertMany(sampleProducts)
+          const defaultUsers = users.map((user) => {
+            for (let index = 0; index < createdRoles.length; index++) {
+                if(createdRoles[index].name==user.roleId){
+                    return {...user,roleId:createdRoles[index]._id};
+                }
+                
+            }
+          });
+         const createdUsers = await User.insertMany(defaultUsers);
+          //const adminId = createdUsers[0]._id;
 
         console.log('Data Imported!');
         process.exit();
@@ -38,7 +44,9 @@ const destroyData = async () => {
 
 const deleteSchema = async () => {
     await User.deleteMany();
+    await Role.deleteMany();
 }
+
 
 if (process.argv[2] === '-d') {
     destroyData();
